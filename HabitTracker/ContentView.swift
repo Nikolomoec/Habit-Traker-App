@@ -12,29 +12,33 @@ struct ContentView: View {
     @AppStorage("streak") var streak = 0
     @AppStorage("streakHeight") var streakHeight = 0
     var body: some View {
-        VStack {
-            HStack {
-                Text(Date().formattedMonth)
-                Spacer()
-                Text(Date().formattedTime)
-            }
-            .font(.largeTitle)
-            .bold()
-            .padding()
+        ZStack {
+            LinearGradient(colors: [Color.yellow, Color.white], startPoint: .top, endPoint: .bottom)
+                .ignoresSafeArea()
             VStack {
-                ButtonView(streak: $streak)
                 HStack {
-                    Text("Your Streak: \(streak)")
+                    Text(Date().formattedMonth)
                     Spacer()
-                    Text("Highest Streak: \(streakHeight)")
+                    Text(Date().formattedTime)
                 }
-                .padding(40)
+                .font(.largeTitle)
                 .bold()
-                .font(.title)
+                .padding()
+                VStack {
+                    ButtonView(streak: $streak)
+                    HStack {
+                        Text("Your Streak: \(streak)")
+                        Spacer()
+                        Text("Highest Streak: \(streakHeight)")
+                    }
+                    .padding(40)
+                    .bold()
+                    .font(.title)
+                }
+                Spacer()
             }
-            Spacer()
+            .padding()
         }
-        .padding()
     }
 }
 struct ContentView_Previews: PreviewProvider {
