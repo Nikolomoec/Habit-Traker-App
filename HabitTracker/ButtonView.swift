@@ -17,8 +17,8 @@ struct ButtonView: View {
     }
     private var buttonColor: LinearGradient {
         return canUserPress ?
-        LinearGradient(gradient: Gradient(colors: [Color.black, Color.green]), startPoint: .leading, endPoint: .trailing) :
-        LinearGradient(gradient: Gradient(colors: [Color.black, Color.purple]), startPoint: .leading, endPoint: .trailing)
+        LinearGradient(gradient: Gradient(colors: [Color("buttonNotAdded1"), Color("buttonNotAdded2")]), startPoint: .leading, endPoint: .trailing) :
+        LinearGradient(gradient: Gradient(colors: [Color("buttonAdded1"), Color("buttonAdded1")]), startPoint: .leading, endPoint: .trailing)
         
     }
 
