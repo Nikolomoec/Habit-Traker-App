@@ -49,8 +49,10 @@ struct ButtonView: View {
                 
             }
             .onReceive(timer) { date in
-                       let midnight = Calendar.current.startOfDay(for: Date())
-                       if date >= midnight {
+                       let calendar = Calendar.current
+                       let midnightOfNextDay = calendar.date(byAdding: .day, value: 1, to: calendar.startOfDay(for: Date()))!
+                       let timeIntervalUntilMidnight = midnightOfNextDay.timeIntervalSince(Date())
+                       if timeIntervalUntilMidnight <= 60 {
                            canUserPress = true
                        }
                    }
