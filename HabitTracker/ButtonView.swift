@@ -26,6 +26,8 @@ struct ButtonView: View {
         LinearGradient(gradient: Gradient(colors: [Color("buttonAdded1"), Color("buttonAdded2")]), startPoint: .leading, endPoint: .trailing)
         
     }
+    
+    private let timer = Timer.publish(every: 60, on: .current, in: .default).autoconnect()
 
     var body: some View {
             Button {
@@ -46,6 +48,12 @@ struct ButtonView: View {
                 }
                 
             }
+            .onReceive(timer) { date in
+                       let midnight = Calendar.current.startOfDay(for: Date())
+                       if date >= midnight {
+                           canUserPress = true
+                       }
+                   }
     }
 }
 

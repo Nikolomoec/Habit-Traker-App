@@ -11,15 +11,13 @@ struct ContentView: View {
     
     @AppStorage("streak") var streak = 0
     @AppStorage("streakHeight") var streakHeight = 0
-    
-    private var canUserPress = UserDefaults.standard.value(forKey: "canUserPress")
+    @AppStorage("canUserPress") var canUserPress = true
     
     @EnvironmentObject var model: ViewModel
     
     var body: some View {
         ZStack {
-            
-            canUserPress as! Bool ?
+            canUserPress ?
             LinearGradient(gradient: Gradient(colors: [Color("backNotAdded1"), Color("backNotAdded2")]), startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea() :
             LinearGradient(gradient: Gradient(colors: [Color("backAdded1"), Color("backAdded2")]), startPoint: .top, endPoint: .bottom)
