@@ -11,6 +11,7 @@ struct ContentView: View {
     
     @AppStorage("streak") var streak = 0
     @AppStorage("streakHeight") var streakHeight = 0
+    
     private var canUserPress = UserDefaults.standard.value(forKey: "canUserPress")
     
     @EnvironmentObject var model: ViewModel
