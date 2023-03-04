@@ -21,7 +21,7 @@ struct ButtonView: View {
     @EnvironmentObject var model: ViewModel
     
     private var buttonColor: LinearGradient {
-        return model.canUserPress ?
+        return canUserPress ?
         LinearGradient(gradient: Gradient(colors: [Color("buttonNotAdded1"), Color("buttonNotAdded2")]), startPoint: .leading, endPoint: .trailing) :
         LinearGradient(gradient: Gradient(colors: [Color("buttonAdded1"), Color("buttonAdded2")]), startPoint: .leading, endPoint: .trailing)
         
@@ -29,7 +29,7 @@ struct ButtonView: View {
 
     var body: some View {
             Button {
-                if model.canUserPress {
+                if canUserPress {
                     lastUserDate = Date()
                     streak += 1
                 }

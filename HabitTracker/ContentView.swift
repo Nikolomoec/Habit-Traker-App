@@ -19,7 +19,7 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             
-            model.canUserPress as! Bool ?
+            canUserPress as! Bool ?
             LinearGradient(gradient: Gradient(colors: [Color("backNotAdded1"), Color("backNotAdded2")]), startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea() :
             LinearGradient(gradient: Gradient(colors: [Color("backAdded1"), Color("backAdded2")]), startPoint: .top, endPoint: .bottom)
