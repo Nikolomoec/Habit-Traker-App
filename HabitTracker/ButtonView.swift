@@ -24,7 +24,6 @@ struct ButtonView: View {
         return LinearGradient(gradient: canUserPress ?
             Gradient(colors: [Color("buttonNotAdded1"), Color("buttonNotAdded2")]) :
             Gradient(colors: [Color("buttonAdded1"), Color("buttonAdded2")]), startPoint: .leading, endPoint: .trailing)
-        
     }
 
     var body: some View {
@@ -48,8 +47,10 @@ struct ButtonView: View {
                 
             }
             .onReceive(NotificationCenter.default.publisher(for: Notification.Name.NSCalendarDayChanged)) { _ in
-                           canUserPress = true
-                       }
+                DispatchQueue.main.async {
+                    canUserPress = true
+                }
+            }
     }
 }
 
