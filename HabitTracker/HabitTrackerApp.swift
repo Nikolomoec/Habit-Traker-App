@@ -9,10 +9,17 @@ import SwiftUI
 
 @main
 struct HabitTrackerApp: App {
+    
+    @AppStorage("canUserPress") var canUserPress = true
+    @AppStorage("lastUserDate") var lastUserDate = Date()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(ViewModel())
+                .onAppear {
+                    canUserPress = !(Calendar.current.component(.day, from: lastUserDate) == Calendar.current.component(.day, from: Date()))
+                }
         }
     }
 }
