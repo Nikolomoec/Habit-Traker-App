@@ -26,7 +26,7 @@ struct ContentView: View {
         ZStack {
                 LinearGradient (gradient: canUserPress ?
                   Gradient(colors: [Color("backNotAdded1"), Color("backNotAdded2")]) :
-                  Gradient(colors: [Color("backAdded1"), Color("backAdded2")]), startPoint: .top, endPoint: .bottom)
+                  Gradient(colors: [Color("backAdded1"), Color("backAdded2")]), startPoint: .topLeading, endPoint: .bottomTrailing)
                 .animation(.easeInOut(duration: 2), value: canUserPress)
                 .ignoresSafeArea()
             
