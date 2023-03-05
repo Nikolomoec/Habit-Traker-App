@@ -21,13 +21,11 @@ struct ButtonView: View {
     @EnvironmentObject var model: ViewModel
     
     private var buttonColor: LinearGradient {
-        return canUserPress ?
-        LinearGradient(gradient: Gradient(colors: [Color("buttonNotAdded1"), Color("buttonNotAdded2")]), startPoint: .leading, endPoint: .trailing) :
-        LinearGradient(gradient: Gradient(colors: [Color("buttonAdded1"), Color("buttonAdded2")]), startPoint: .leading, endPoint: .trailing)
+        return LinearGradient(gradient: canUserPress ?
+            Gradient(colors: [Color("buttonNotAdded1"), Color("buttonNotAdded2")]) :
+            Gradient(colors: [Color("buttonAdded1"), Color("buttonAdded2")]), startPoint: .leading, endPoint: .trailing)
         
     }
-    
-    private let timer = Timer.publish(every: 60, on: .current, in: .default).autoconnect()
 
     var body: some View {
             Button {
@@ -39,6 +37,7 @@ struct ButtonView: View {
                 ZStack {
                     Circle()
                         .fill(buttonColor)
+                        .animation(.default, value: canUserPress)
                         .frame(width: 200, height: 200)
                     
                     Text("Add!")
@@ -48,14 +47,9 @@ struct ButtonView: View {
                 }
                 
             }
-            .onReceive(timer) { date in
-                       let calendar = Calendar.current
-                       let midnightOfNextDay = calendar.date(byAdding: .day, value: 1, to: calendar.startOfDay(for: Date()))!
-                       let timeIntervalUntilMidnight = midnightOfNextDay.timeIntervalSince(Date())
-                       if timeIntervalUntilMidnight <= 60 {
+            .onReceive(NotificationCenter.default.publisher(for: Notification.Name.NSCalendarDayChanged)) { _ in
                            canUserPress = true
                        }
-                   }
     }
 }
 

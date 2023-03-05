@@ -16,12 +16,13 @@ struct ContentView: View {
     @EnvironmentObject var model: ViewModel
     
     var body: some View {
+        
         ZStack {
-            canUserPress ?
-            LinearGradient(gradient: Gradient(colors: [Color("backNotAdded1"), Color("backNotAdded2")]), startPoint: .top, endPoint: .bottom)
-                .ignoresSafeArea() :
-            LinearGradient(gradient: Gradient(colors: [Color("backAdded1"), Color("backAdded2")]), startPoint: .top, endPoint: .bottom)
+                LinearGradient (gradient: canUserPress ?
+                  Gradient(colors: [Color("backNotAdded1"), Color("backNotAdded2")]) :
+                  Gradient(colors: [Color("backAdded1"), Color("backAdded2")]), startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
+                .animation(.default, value: canUserPress)
             
             VStack {
                 HStack {
