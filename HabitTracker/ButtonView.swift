@@ -10,21 +10,26 @@ import SwiftUI
 struct ButtonView: View {
     
     @Binding var streak: Int
-    @AppStorage("lastUserDate") private var lastUserDate = Date()
     
-    private var canUserPress: Bool {
-        return !Calendar.current.isDateInToday(lastUserDate)
+    @AppStorage("canUserPress") private var canUserPress = true
+    @AppStorage("lastUserDate") private var lastUserDate = Date() {
+        didSet {
+            model.canUserPressCalc()
+        }
     }
+    
+    @EnvironmentObject var model: ViewModel
+    
     private var buttonColor: LinearGradient {
-        return canUserPress ?
+        return model.canUserPress ?
         LinearGradient(gradient: Gradient(colors: [Color("buttonNotAdded1"), Color("buttonNotAdded2")]), startPoint: .leading, endPoint: .trailing) :
-        LinearGradient(gradient: Gradient(colors: [Color("buttonAdded1"), Color("buttonAdded1")]), startPoint: .leading, endPoint: .trailing)
+        LinearGradient(gradient: Gradient(colors: [Color("buttonAdded1"), Color("buttonAdded2")]), startPoint: .leading, endPoint: .trailing)
         
     }
 
     var body: some View {
             Button {
-                if canUserPress {
+                if model.canUserPress {
                     lastUserDate = Date()
                     streak += 1
                 }
@@ -47,6 +52,7 @@ struct ButtonView: View {
 struct ButtonView_Previews: PreviewProvider {
     static var previews: some View {
         ButtonView(streak: .constant(0))
+            .environmentObject(ViewModel())
     }
 }
 

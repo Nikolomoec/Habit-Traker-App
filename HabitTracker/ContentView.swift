@@ -11,15 +11,25 @@ struct ContentView: View {
     
     @AppStorage("streak") var streak = 0
     @AppStorage("streakHeight") var streakHeight = 0
+    private var canUserPress = UserDefaults.standard.value(forKey: "canUserPress")
+    
+    @EnvironmentObject var model: ViewModel
+    
     var body: some View {
         ZStack {
-            LinearGradient(colors: [Color.yellow, Color.white], startPoint: .top, endPoint: .bottom)
+            
+            model.canUserPress as! Bool ?
+            LinearGradient(gradient: Gradient(colors: [Color("backNotAdded1"), Color("backNotAdded2")]), startPoint: .top, endPoint: .bottom)
+                .ignoresSafeArea() :
+            LinearGradient(gradient: Gradient(colors: [Color("backAdded1"), Color("backAdded2")]), startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
+            
             VStack {
                 HStack {
                     Text(Date().formattedMonth)
-                    Spacer()
+                        .padding(.horizontal, 10)
                     Text(Date().formattedTime)
+                        .padding(.horizontal, 10)
                 }
                 .font(.largeTitle)
                 .bold()
@@ -44,6 +54,7 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(ViewModel())
     }
 }
 
