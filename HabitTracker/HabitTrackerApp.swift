@@ -18,7 +18,9 @@ struct HabitTrackerApp: App {
             ContentView()
                 .environmentObject(ViewModel())
                 .onAppear {
-                    canUserPress = !(Calendar.current.component(.day, from: lastUserDate) == Calendar.current.component(.day, from: Date()))
+                    DispatchQueue.main.async {
+                        canUserPress = !(Calendar.current.component(.day, from: lastUserDate) == Calendar.current.component(.day, from: Date()))
+                    }
                 }
         }
     }

@@ -21,8 +21,8 @@ struct ContentView: View {
                 LinearGradient (gradient: canUserPress ?
                   Gradient(colors: [Color("backNotAdded1"), Color("backNotAdded2")]) :
                   Gradient(colors: [Color("backAdded1"), Color("backAdded2")]), startPoint: .top, endPoint: .bottom)
+                .animation(.easeInOut(duration: 2), value: canUserPress)
                 .ignoresSafeArea()
-                .animation(.default, value: canUserPress)
             
             VStack {
                 HStack {

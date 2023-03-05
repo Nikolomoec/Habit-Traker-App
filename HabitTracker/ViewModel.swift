@@ -9,11 +9,21 @@ import Foundation
 
 class ViewModel: ObservableObject {
     
-    @Published var canUserPress = true
-    
     func canUserPressCalc() {
         let lastUserDate = UserDefaults.standard.value(forKey: "lastUserDate")
-        canUserPress = !Calendar.current.isDateInToday(lastUserDate as? Date ?? Date())
-        UserDefaults.standard.set(canUserPress, forKey: "canUserPress")
+        let canUserPress = !Calendar.current.isDateInToday(lastUserDate as? Date ?? Date())
+        DispatchQueue.main.async {
+            UserDefaults.standard.set(canUserPress, forKey: "canUserPress")
+        }
+    }
+    
+    func streakHeightCalc() {
+        let streak = UserDefaults.standard.value(forKey: "streak") as! Int
+        let streakHeight = UserDefaults.standard.value(forKey: "streakHeight") as? Int ?? 0
+        if streak >= streakHeight {
+            DispatchQueue.main.async {
+                UserDefaults.standard.set(streak, forKey: "streakHeight")
+            }
+        }
     }
 }

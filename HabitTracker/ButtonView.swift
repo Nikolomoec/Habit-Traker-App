@@ -29,14 +29,17 @@ struct ButtonView: View {
     var body: some View {
             Button {
                 if canUserPress {
-                    lastUserDate = Date()
-                    streak += 1
+                    DispatchQueue.main.async {
+                        lastUserDate = Date()
+                    }
+                        streak += 1
+                    model.streakHeightCalc()
                 }
             } label: {
                 ZStack {
                     Circle()
                         .fill(buttonColor)
-                        .animation(.default, value: canUserPress)
+                        .animation(.easeInOut(duration: 2), value: canUserPress)
                         .frame(width: 200, height: 200)
                     
                     Text("Add!")
