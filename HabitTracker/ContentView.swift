@@ -13,7 +13,13 @@ struct ContentView: View {
     @AppStorage("streakHeight") var streakHeight = 0
     @AppStorage("canUserPress") var canUserPress = true
     
+    @State private var currentDate = Date()
+    @State private var currentTime = Date()
+
     @EnvironmentObject var model: ViewModel
+    
+    let timer = Timer.publish(every: 1, on: .main, in: .common)
+        .autoconnect()
     
     var body: some View {
         
@@ -26,10 +32,16 @@ struct ContentView: View {
             
             VStack {
                 HStack {
-                    Text(Date().formattedMonth)
+                    Text(currentDate.formattedMonth)
                         .padding(.horizontal, 10)
-                    Text(Date().formattedTime)
+                        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.NSCalendarDayChanged)) { _ in
+                            currentDate = Date()
+                        }
+                    Text(currentTime.formattedTime)
                         .padding(.horizontal, 10)
+                        .onReceive(timer) { _ in
+                            currentTime = Date()
+                        }
                 }
                 .font(.largeTitle)
                 .bold()
