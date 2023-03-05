@@ -10,7 +10,6 @@ import SwiftUI
 @main
 struct HabitTrackerApp: App {
     
-    @AppStorage("canUserPress") var canUserPress = true
     @AppStorage("lastUserDate") var lastUserDate = Date()
     
     var body: some Scene {
@@ -18,8 +17,15 @@ struct HabitTrackerApp: App {
             ContentView()
                 .environmentObject(ViewModel())
                 .onAppear {
-                    DispatchQueue.main.async {
-                        canUserPress = !(Calendar.current.component(.day, from: lastUserDate) == Calendar.current.component(.day, from: Date()))
+                    
+                    let lastUserDay = Calendar.current.component(.day, from: lastUserDate) // 4
+                    let todaysDay = Calendar.current.component(.day, from: Date()) // 6
+                    
+                    UserDefaults.standard.set(!(lastUserDay == todaysDay), forKey: "canUserPress")
+                    
+                    if lastUserDate.addingTimeInterval(86400*2) < Date() {
+                        UserDefaults.standard.set(0, forKey: "streak")
+                        
                     }
                 }
         }

@@ -52,6 +52,9 @@ struct ButtonView: View {
             .onReceive(NotificationCenter.default.publisher(for: Notification.Name.NSCalendarDayChanged)) { _ in
                 DispatchQueue.main.async {
                     canUserPress = true
+                    if lastUserDate.addingTimeInterval(86400*2) < Date() {
+                        UserDefaults.standard.set(0, forKey: "streak")
+                    }
                 }
             }
     }
