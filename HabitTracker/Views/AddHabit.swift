@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct AddHabit: View {
+    
+    @State var colorState = Array(repeating: false, count: 7)
+    @State var selectedButtonNumber: Int?
+    
     var body: some View {
         VStack {
             // Heading
@@ -34,11 +38,21 @@ struct AddHabit: View {
             Text("How many days per week should you comlete that habit?")
                 .bold()
                 .font(.title2)
-            
-            ForEach(1...7, id: \.self) { index in
-                
+            HStack {
+                ForEach(1...7, id: \.self) { number in
+                    
+                    Button {
+                        if let previousNumber = selectedButtonNumber {
+                            colorState[previousNumber].toggle()
+                        }
+                        colorState[number-1].toggle()
+                        selectedButtonNumber = number - 1
+                    } label: {
+                        daysPerWeekButton(colorState: colorState[number-1], number: number)
+                    }
+                    
+                }
             }
-            
             // Color Picker
             Text("")
             

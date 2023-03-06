@@ -10,22 +10,22 @@ import SwiftUI
 struct daysPerWeekButton: View {
     
     var colorState: Bool
-    var number: String
+    var number: Int
     
     var body: some View {
         ZStack {
             Rectangle()
-                .stroke(Color.gray, lineWidth: 5)
+                .stroke(Color.gray, lineWidth: 3)
                 .background(
                     Rectangle()
                         .foregroundColor(
                             colorState ? .blue : .black
                         )
                 )
-                .frame(width: 60, height: 60)
+                .frame(width: 50, height: 50)
                 .cornerRadius(10)
             
-            Text(number)
+            Text(String(number))
                 .foregroundColor(.white)
                 .bold()
                 .font(.largeTitle)
@@ -35,6 +35,6 @@ struct daysPerWeekButton: View {
 
 struct daysPerWeekButton_Previews: PreviewProvider {
     static var previews: some View {
-        daysPerWeekButton(colorState: false, number: "1")
+        daysPerWeekButton(colorState: false, number: 1)
     }
 }
