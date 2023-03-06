@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BackgroundGrad: View {
-    @AppStorage("canUserPress") var canUserPress = true
+    @AppStorage(Constants.Config.canUserPress) var canUserPress = true
     var body: some View {
         LinearGradient (gradient: canUserPress ?
           Gradient(colors: [Color("backNotAdded1"), Color("backNotAdded2")]) :

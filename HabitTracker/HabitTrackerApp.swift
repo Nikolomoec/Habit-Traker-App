@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct HabitTrackerApp: App {
     
-    @AppStorage("lastUserDate") var lastUserDate = Date()
+    @AppStorage(Constants.Config.lastUserDate) var lastUserDate = Date()
     
     var body: some Scene {
         WindowGroup {
@@ -21,7 +21,7 @@ struct HabitTrackerApp: App {
                     let lastUserDay = Calendar.current.component(.day, from: lastUserDate) // 4
                     let todaysDay = Calendar.current.component(.day, from: Date()) // 6
                     
-                    UserDefaults.standard.set(!(lastUserDay == todaysDay), forKey: "canUserPress")
+                    UserDefaults.standard.set(!(lastUserDay == todaysDay), forKey: Constants.Config.canUserPress)
                     
                     if lastUserDate.addingTimeInterval(86400*2) < Date() {
                         UserDefaults.standard.set(0, forKey: "streak")

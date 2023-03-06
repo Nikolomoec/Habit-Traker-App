@@ -11,8 +11,8 @@ struct ButtonView: View {
     
     @Binding var streak: Int
     
-    @AppStorage("canUserPress") private var canUserPress = true
-    @AppStorage("lastUserDate") private var lastUserDate = Date() {
+    @AppStorage(Constants.Config.canUserPress) private var canUserPress = true
+    @AppStorage(Constants.Config.lastUserDate) private var lastUserDate = Date() {
         didSet {
             model.canUserPressCalc()
         }
@@ -53,7 +53,7 @@ struct ButtonView: View {
                 DispatchQueue.main.async {
                     canUserPress = true
                     if lastUserDate.addingTimeInterval(86400*2) < Date() {
-                        UserDefaults.standard.set(0, forKey: "streak")
+                        UserDefaults.standard.set(0, forKey: Constants.Config.streak)
                     }
                 }
             }

@@ -9,9 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @AppStorage("streak") var streak = 0
-    @AppStorage("streakHeight") var streakHeight = 0
-    @AppStorage("canUserPress") var canUserPress = true
+    @AppStorage(Constants.Config.streak) var streak = 0
+    @AppStorage(Constants.Config.streakHeight) var streakHeight = 0
+    @AppStorage(Constants.Config.canUserPress) var canUserPress = true
     
     @State private var currentDate = Date()
     @State private var currentTime = Date()
