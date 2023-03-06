@@ -9,6 +9,8 @@ import Foundation
 
 class ViewModel: ObservableObject {
     
+    @Published var habitArray = [HabitModel]()
+    
     func canUserPressCalc() {
         let lastUserDate = UserDefaults.standard.value(forKey: "lastUserDate")
         let canUserPress = !Calendar.current.isDateInToday(lastUserDate as? Date ?? Date())
