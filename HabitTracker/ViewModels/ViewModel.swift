@@ -28,4 +28,8 @@ class ViewModel: ObservableObject {
             }
         }
     }
+    
+    func addHabbit(name: String, daysPerWeek: Int, habitColor: Int) {
+        habitArray.append(HabitModel(name: name, daysPerWeek: daysPerWeek, habitColor: habitColor))
+    }
 }

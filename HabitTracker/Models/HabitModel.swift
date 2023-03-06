@@ -15,11 +15,11 @@ class HabitModel: Identifiable {
     var daysPerWeek: Int
     var habitColor: Int
     
-    init() {
+    init(name: String, daysPerWeek: Int, habitColor: Int) {
         self.id = UUID()
         self.date = Date()
-        self.name = "Workout"
-        self.daysPerWeek = 3
-        self.habitColor = 1
+        self.name = name
+        self.daysPerWeek = daysPerWeek
+        self.habitColor = habitColor
     }
 }
