@@ -13,6 +13,8 @@
 		5A0B65A529B65AE300416B5C /* HabitListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0B65A429B65AE300416B5C /* HabitListView.swift */; };
 		5A0B65A729B65BC400416B5C /* HabitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0B65A629B65BC400416B5C /* HabitModel.swift */; };
 		5A0B65AD29B6610400416B5C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0B65AC29B6610400416B5C /* Constants.swift */; };
+		5A0B65AF29B6653D00416B5C /* AddHabit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0B65AE29B6653D00416B5C /* AddHabit.swift */; };
+		5A0B65B129B6682000416B5C /* daysPerWeekButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0B65B029B6682000416B5C /* daysPerWeekButton.swift */; };
 		5A6C4F5D29B3B48F003C9318 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6C4F5C29B3B48F003C9318 /* ViewModel.swift */; };
 		5AD82B1429AD3808007317B6 /* HabitTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD82B1329AD3808007317B6 /* HabitTrackerApp.swift */; };
 		5AD82B1629AD3808007317B6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD82B1529AD3808007317B6 /* ContentView.swift */; };
@@ -28,6 +30,8 @@
 		5A0B65A429B65AE300416B5C /* HabitListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitListView.swift; sourceTree = "<group>"; };
 		5A0B65A629B65BC400416B5C /* HabitModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitModel.swift; sourceTree = "<group>"; };
 		5A0B65AC29B6610400416B5C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		5A0B65AE29B6653D00416B5C /* AddHabit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabit.swift; sourceTree = "<group>"; };
+		5A0B65B029B6682000416B5C /* daysPerWeekButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = daysPerWeekButton.swift; sourceTree = "<group>"; };
 		5A6C4F5C29B3B48F003C9318 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		5AD82B1029AD3808007317B6 /* HabitTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HabitTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AD82B1329AD3808007317B6 /* HabitTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitTrackerApp.swift; sourceTree = "<group>"; };
@@ -55,6 +59,7 @@
 				5A0B65A429B65AE300416B5C /* HabitListView.swift */,
 				5AD82B1529AD3808007317B6 /* ContentView.swift */,
 				5A0B659E29B50EDB00416B5C /* SettingsView.swift */,
+				5A0B65AE29B6653D00416B5C /* AddHabit.swift */,
 				5A0B65AA29B65F6F00416B5C /* HelperViews */,
 			);
 			path = Views;
@@ -81,6 +86,7 @@
 			children = (
 				5AD82B2129AD3866007317B6 /* ButtonView.swift */,
 				5A0B65A229B513CE00416B5C /* BackgroundGrad.swift */,
+				5A0B65B029B6682000416B5C /* daysPerWeekButton.swift */,
 			);
 			path = HelperViews;
 			sourceTree = "<group>";
@@ -201,6 +207,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A0B65AF29B6653D00416B5C /* AddHabit.swift in Sources */,
 				5A0B65A729B65BC400416B5C /* HabitModel.swift in Sources */,
 				5A0B65A329B513CE00416B5C /* BackgroundGrad.swift in Sources */,
 				5A0B659D29B50BF800416B5C /* HabitTabView.swift in Sources */,
@@ -210,6 +217,7 @@
 				5A0B659F29B50EDB00416B5C /* SettingsView.swift in Sources */,
 				5A0B65A529B65AE300416B5C /* HabitListView.swift in Sources */,
 				5A6C4F5D29B3B48F003C9318 /* ViewModel.swift in Sources */,
+				5A0B65B129B6682000416B5C /* daysPerWeekButton.swift in Sources */,
 				5AD82B2229AD3866007317B6 /* ButtonView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
