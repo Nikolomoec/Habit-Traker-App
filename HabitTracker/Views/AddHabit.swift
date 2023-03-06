@@ -9,8 +9,8 @@ import SwiftUI
 
 struct AddHabit: View {
     
-    @State var colorState = Array(repeating: false, count: 7)
-    @State var selectedButtonNumber: Int?
+    @State var colorState = [false,false,false,true,false,false,false]
+    @State var selectedButtonNumber = 3
     
     var body: some View {
         VStack {
@@ -42,9 +42,7 @@ struct AddHabit: View {
                 ForEach(1...7, id: \.self) { number in
                     
                     Button {
-                        if let previousNumber = selectedButtonNumber {
-                            colorState[previousNumber].toggle()
-                        }
+                        colorState[selectedButtonNumber].toggle()
                         colorState[number-1].toggle()
                         selectedButtonNumber = number - 1
                     } label: {
