@@ -24,13 +24,9 @@ class HabitModel: Identifiable {
     }
 }
 
-class HabitTemplates: Identifiable {
+class HabitTemplates: Identifiable, Decodable {
     
     var id: UUID?
     var name: String
     
-    init() {
-        self.id = UUID()
-        self.name = "name"
-    }
 }

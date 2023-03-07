@@ -13,6 +13,10 @@ class ViewModel: ObservableObject {
     @Published var templates = [HabitTemplates]()
     @Published var addHabitSheet = false
     
+    init() {
+        getRemoteData()
+    }
+    
     func canUserPressCalc() {
         let lastUserDate = UserDefaults.standard.value(forKey: Constants.Config.lastUserDate)
         let canUserPress = !Calendar.current.isDateInToday(lastUserDate as? Date ?? Date())
@@ -33,5 +37,31 @@ class ViewModel: ObservableObject {
     
     func addHabbit(name: String, daysPerWeek: Int, habitColor: Int) {
         habits.append(HabitModel(name: name, daysPerWeek: daysPerWeek + 1, habitColor: habitColor))
+    }
+    
+    func getRemoteData() {
+        
+        let strPath = "https://raw.githubusercontent.com/Nikolomoec/HabitTrackerResources/main/templates.json"
+        
+        let url = URL(string: strPath)
+        
+        guard url != nil else { return }
+        
+        let request = URLRequest(url: url!)
+        
+        let session = URLSession.shared
+        
+        let dataTask = session.dataTask(with: request) { data, response, error in
+            guard error != nil else { return }
+            
+            let decoder = JSONDecoder()
+            do {
+                let decodedData = try decoder.decode([HabitTemplates].self, from: data!)
+            }
+            catch {
+                print(error)
+            }
+        }
+        dataTask.resume()
     }
 }
