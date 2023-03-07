@@ -11,26 +11,27 @@ struct AddHabit: View {
     
     @State private var colorState = [false,false,false,true,false,false,false]
     @State private var selectedButtonNumber = 3
-    @State private var showAlert = false
+    @State private var showCancelAlert = false
+    @State private var showSaveAlert = false
+    @State private var habitName = ""
     
     @EnvironmentObject var model: ViewModel
     
     var body: some View {
         VStack (alignment: .leading) {
-            // Heading
+            // MARK: - Heading
             HStack {
                 
                 Button("Cancel") {
-                    showAlert.toggle()
+                    showCancelAlert.toggle()
                 }
-                .alert("Warning", isPresented: $showAlert) {
-                    Text("If you made changes, they will be discarded")
-                    Button  {
-                        // TODO addHabit .sheet = false
-                    } label: {
-                        Text("Discard changes")
-                    }
-
+                .alert(isPresented: $showCancelAlert) {
+                    Alert(title: Text("Warning"),
+                          message: Text("If you made changes, they will be discarded"),
+                          primaryButton: .destructive(Text("Discard changes"), action: {
+                          model.addHabitSheet = false
+                          }),
+                          secondaryButton: .cancel())
                 }
                 
                 Spacer()
@@ -41,19 +42,40 @@ struct AddHabit: View {
                 Spacer()
                 
                 Button("Save") {
-                    model.addHabbit(name: "name", daysPerWeek: selectedButtonNumber, habitColor: 1)
+                    if habitName == "" {
+                        showSaveAlert.toggle()
+                    } else {
+                        model.addHabbit(name: habitName, daysPerWeek: selectedButtonNumber, habitColor: 1)
+                        model.addHabitSheet = false
+                    }
+                }
+                .alert(isPresented: $showSaveAlert) {
+                    Alert(title: Text("Your habit needs a name"), dismissButton: .cancel(Text("OK")))
                 }
             }
             .padding()
             .font(.title2)
             
-            // Main
+            // MARK: - Main
             
             Text("Habit name")
                 .bold()
                 .font(.title)
                 .padding(.horizontal, 12)
-            //TextField
+            
+                TextField("", text: $habitName)
+                .foregroundColor(.white)
+                .bold()
+                .font(.title2)
+                .padding(.horizontal, 16)
+                .background (
+                    RoundedRectangle(cornerRadius: 8, style: .continuous)
+                        .stroke(.gray)
+                        .foregroundColor(Color("TextFieldColor"))
+                        .frame(height:70)
+                )
+                .padding()
+                .padding(.bottom)
 
             Text("How many days per week should you comlete that habit?")
                 .bold()
@@ -73,7 +95,8 @@ struct AddHabit: View {
                 }
             }
             .padding()
-            // Color Picker
+            
+            // MARK: - Color Picker
             Text("")
             
         }

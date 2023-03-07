@@ -10,6 +10,7 @@ import Foundation
 class ViewModel: ObservableObject {
     
     @Published var habitArray = [HabitModel]()
+    @Published var addHabitSheet = false
     
     func canUserPressCalc() {
         let lastUserDate = UserDefaults.standard.value(forKey: "lastUserDate")
