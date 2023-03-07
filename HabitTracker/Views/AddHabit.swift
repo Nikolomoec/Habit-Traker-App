@@ -64,14 +64,13 @@ struct AddHabit: View {
                 .padding(.horizontal, 12)
             
                 TextField("", text: $habitName)
-                .foregroundColor(.white)
+                .foregroundColor(.black)
                 .bold()
                 .font(.title2)
                 .padding(.horizontal, 16)
                 .background (
                     RoundedRectangle(cornerRadius: 8, style: .continuous)
                         .stroke(.gray)
-                        .foregroundColor(Color("TextFieldColor"))
                         .frame(height:70)
                 )
                 .padding()
