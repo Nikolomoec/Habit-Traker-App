@@ -23,3 +23,14 @@ class HabitModel: Identifiable {
         self.habitColor = habitColor
     }
 }
+
+class HabitTemplates: Identifiable {
+    
+    var id: UUID?
+    var name: String
+    
+    init() {
+        self.id = UUID()
+        self.name = "name"
+    }
+}

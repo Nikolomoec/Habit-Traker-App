@@ -9,7 +9,8 @@ import Foundation
 
 class ViewModel: ObservableObject {
     
-    @Published var habitArray = [HabitModel]()
+    @Published var habits = [HabitModel]()
+    @Published var templates = [HabitTemplates]()
     @Published var addHabitSheet = false
     
     func canUserPressCalc() {
@@ -31,6 +32,6 @@ class ViewModel: ObservableObject {
     }
     
     func addHabbit(name: String, daysPerWeek: Int, habitColor: Int) {
-        habitArray.append(HabitModel(name: name, daysPerWeek: daysPerWeek + 1, habitColor: habitColor))
+        habits.append(HabitModel(name: name, daysPerWeek: daysPerWeek + 1, habitColor: habitColor))
     }
 }

@@ -74,12 +74,17 @@ struct AddHabit: View {
                         .frame(height:70)
                 )
                 .padding()
-                .padding(.bottom)
 
+            Text("Templates:")
+                .font(.title3)
+                .padding(.horizontal, 13)
+                .padding(.vertical)
+            
+            
             Text("How many days per week should you comlete that habit?")
                 .bold()
                 .font(.title)
-                .padding(.horizontal, 12)
+                .padding(.horizontal, 13)
             HStack {
                 ForEach(1...7, id: \.self) { number in
                     
@@ -98,6 +103,7 @@ struct AddHabit: View {
             // MARK: - Color Picker
             Text("")
             
+            Spacer()
         }
     }
 }
