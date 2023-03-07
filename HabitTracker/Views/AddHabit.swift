@@ -9,16 +9,28 @@ import SwiftUI
 
 struct AddHabit: View {
     
-    @State var colorState = [false,false,false,true,false,false,false]
-    @State var selectedButtonNumber = 3
+    @State private var colorState = [false,false,false,true,false,false,false]
+    @State private var selectedButtonNumber = 3
+    @State private var showAlert = false
+    
+    @EnvironmentObject var model: ViewModel
     
     var body: some View {
-        VStack {
+        VStack (alignment: .leading) {
             // Heading
             HStack {
                 
                 Button("Cancel") {
-                    
+                    showAlert.toggle()
+                }
+                .alert("Warning", isPresented: $showAlert) {
+                    Text("If you made changes, they will be discarded")
+                    Button  {
+                        // TODO addHabit .sheet = false
+                    } label: {
+                        Text("Discard changes")
+                    }
+
                 }
                 
                 Spacer()
@@ -29,15 +41,24 @@ struct AddHabit: View {
                 Spacer()
                 
                 Button("Save") {
-                    
+                    model.addHabbit(name: "name", daysPerWeek: selectedButtonNumber, habitColor: 1)
                 }
             }
-            .padding(.horizontal)
+            .padding()
+            .font(.title2)
             
             // Main
+            
+            Text("Habit name")
+                .bold()
+                .font(.title)
+                .padding(.horizontal, 12)
+            //TextField
+
             Text("How many days per week should you comlete that habit?")
                 .bold()
-                .font(.title2)
+                .font(.title)
+                .padding(.horizontal, 12)
             HStack {
                 ForEach(1...7, id: \.self) { number in
                     
@@ -51,6 +72,7 @@ struct AddHabit: View {
                     
                 }
             }
+            .padding()
             // Color Picker
             Text("")
             
@@ -61,5 +83,6 @@ struct AddHabit: View {
 struct addHabit_Previews: PreviewProvider {
     static var previews: some View {
         AddHabit()
+            .environmentObject(ViewModel())
     }
 }
