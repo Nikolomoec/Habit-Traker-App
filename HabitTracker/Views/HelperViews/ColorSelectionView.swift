@@ -11,7 +11,8 @@ struct ColorSelectionView: View {
     
     @State private var colorPicker = false
     @State private var colorText = "Default - Tap to open picker"
-    @State private var selectedColor = Color.blue
+    
+    @EnvironmentObject var model: ViewModel
     
     var body: some View {
         VStack {
@@ -20,7 +21,7 @@ struct ColorSelectionView: View {
             } label: {
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
-                        .fill(selectedColor)
+                        .fill(model.habitColor)
                         .frame(height:70)
                         .padding()
                     Text(colorText)
@@ -30,9 +31,16 @@ struct ColorSelectionView: View {
                         .font(.title2)
                 }
                 .shadow(radius: 5)
-                .background(ColorPicker("", selection: $selectedColor)
+                .background(ColorPicker("", selection: $model.habitColor)
                     .labelsHidden().opacity(0))
             }
+            Text("Tap the big button above to pick up a custom color, or choose from our favourite palettes below:")
+                .padding(.horizontal, 13)
+                .padding(.bottom)
+                .font(.callout)
+            Text("Standart")
+                .font(.headline)
+                .padding(.trailing, 230)
             Spacer()
         }
     }
@@ -41,6 +49,7 @@ struct ColorSelectionView: View {
 struct ColorSelectionView_Previews: PreviewProvider {
     static var previews: some View {
         ColorSelectionView()
+            .environmentObject(ViewModel())
     }
 }
 

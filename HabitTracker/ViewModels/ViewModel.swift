@@ -6,12 +6,14 @@
 //
 
 import Foundation
+import SwiftUI
 
 class ViewModel: ObservableObject {
     
     @Published var habits = [HabitModel]()
     @Published var templates = [HabitTemplates]()
     @Published var addHabitSheet = false
+    @Published var habitColor = Color.blue
     
     init() {
         getRemoteData()
