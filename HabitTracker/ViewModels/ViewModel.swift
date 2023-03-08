@@ -52,11 +52,16 @@ class ViewModel: ObservableObject {
         let session = URLSession.shared
         
         let dataTask = session.dataTask(with: request) { data, response, error in
-            guard error != nil else { return }
+            
+            guard error == nil else { return }
             
             let decoder = JSONDecoder()
             do {
                 let decodedData = try decoder.decode([HabitTemplates].self, from: data!)
+                
+                DispatchQueue.main.async {
+                    self.templates += decodedData
+                }
             }
             catch {
                 print(error)

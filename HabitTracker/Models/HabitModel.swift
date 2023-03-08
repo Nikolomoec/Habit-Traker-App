@@ -26,7 +26,7 @@ class HabitModel: Identifiable {
 
 class HabitTemplates: Identifiable, Decodable {
     
-    var id: UUID?
+    var id: Int
     var name: String
     
 }

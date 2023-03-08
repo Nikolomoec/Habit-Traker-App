@@ -77,10 +77,30 @@ struct AddHabit: View {
 
             Text("Templates:")
                 .font(.title3)
-                .padding(.horizontal, 13)
-                .padding(.vertical)
-            
-            
+                .padding(13)
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack {
+                    ForEach(model.templates) { habit in
+                        Button {
+                            habitName = habit.name
+                        } label: {
+                            Text(habit.name)
+                                .bold()
+                                .font(.title3)
+                                .padding(10)
+                                .foregroundColor(.white)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 4)
+                                        .foregroundColor(.black)
+                                    )
+                            .padding(.horizontal, 4)
+                        }
+                        .tint(.black)
+                    }
+                }
+            }
+            .padding(.horizontal)
+            .padding(.bottom, 13)
             Text("How many days per week should you comlete that habit?")
                 .bold()
                 .font(.title)
