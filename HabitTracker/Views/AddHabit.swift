@@ -46,7 +46,7 @@ struct AddHabit: View {
                         if habitName == "" {
                             showSaveAlert.toggle()
                         } else {
-                            model.addHabbit(name: habitName, daysPerWeek: selectedButtonNumber, habitColor: 1)
+                            model.addHabbit(name: habitName, daysPerWeek: selectedButtonNumber, habitColor: model.habitColor)
                             model.addHabitSheet = false
                         }
                     }

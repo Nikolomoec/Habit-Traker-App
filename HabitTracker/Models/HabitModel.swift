@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class HabitModel: Identifiable {
     
@@ -13,9 +14,9 @@ class HabitModel: Identifiable {
     var id: UUID?
     var date: Date
     var daysPerWeek: Int
-    var habitColor: Int
+    var habitColor: Color
     
-    init(name: String, daysPerWeek: Int, habitColor: Int) {
+    init(name: String, daysPerWeek: Int, habitColor: Color) {
         self.id = UUID()
         self.date = Date()
         self.name = name

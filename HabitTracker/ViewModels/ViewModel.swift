@@ -37,7 +37,7 @@ class ViewModel: ObservableObject {
         }
     }
     
-    func addHabbit(name: String, daysPerWeek: Int, habitColor: Int) {
+    func addHabbit(name: String, daysPerWeek: Int, habitColor: Color) {
         habits.append(HabitModel(name: name, daysPerWeek: daysPerWeek + 1, habitColor: habitColor))
     }
     
