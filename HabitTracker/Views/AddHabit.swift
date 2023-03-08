@@ -18,113 +18,116 @@ struct AddHabit: View {
     @EnvironmentObject var model: ViewModel
     
     var body: some View {
-        VStack (alignment: .leading) {
-            // MARK: - Heading
-            HStack {
-                
-                Button("Cancel") {
-                    showCancelAlert.toggle()
-                }
-                .alert(isPresented: $showCancelAlert) {
-                    Alert(title: Text("Warning"),
-                          message: Text("If you made changes, they will be discarded"),
-                          primaryButton: .destructive(Text("Discard changes"), action: {
-                          model.addHabitSheet = false
-                          }),
-                          secondaryButton: .cancel())
-                }
-                
-                Spacer()
-                
-                Text("New Habit")
-                    .bold()
-                
-                Spacer()
-                
-                Button("Save") {
-                    if habitName == "" {
-                        showSaveAlert.toggle()
-                    } else {
-                        model.addHabbit(name: habitName, daysPerWeek: selectedButtonNumber, habitColor: 1)
-                        model.addHabitSheet = false
+        ScrollView {
+            VStack (alignment: .leading) {
+                // MARK: - Heading
+                HStack {
+                    
+                    Button("Cancel") {
+                        showCancelAlert.toggle()
+                    }
+                    .alert(isPresented: $showCancelAlert) {
+                        Alert(title: Text("Warning"),
+                              message: Text("If you made changes, they will be discarded"),
+                              primaryButton: .destructive(Text("Discard changes"), action: {
+                            model.addHabitSheet = false
+                        }),
+                              secondaryButton: .cancel())
+                    }
+                    
+                    Spacer()
+                    
+                    Text("New Habit")
+                        .bold()
+                    
+                    Spacer()
+                    
+                    Button("Save") {
+                        if habitName == "" {
+                            showSaveAlert.toggle()
+                        } else {
+                            model.addHabbit(name: habitName, daysPerWeek: selectedButtonNumber, habitColor: 1)
+                            model.addHabitSheet = false
+                        }
+                    }
+                    .alert(isPresented: $showSaveAlert) {
+                        Alert(title: Text("Your habit needs a name"), dismissButton: .cancel(Text("OK")))
                     }
                 }
-                .alert(isPresented: $showSaveAlert) {
-                    Alert(title: Text("Your habit needs a name"), dismissButton: .cancel(Text("OK")))
+                .padding()
+                .font(.title2)
+                
+                // MARK: - Main
+                Group {
+                    Text("Habit name")
+                        .bold()
+                        .font(.title)
+                        .padding(.horizontal, 12)
+                    
+                    TextFieldView(habitName: $habitName)
+                    
+                    Text("Templates:")
+                        .font(.title3)
+                        .padding(13)
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack {
+                            ForEach(model.templates) { habit in
+                                Button {
+                                    habitName = habit.name
+                                } label: {
+                                    Text(habit.name)
+                                        .bold()
+                                        .font(.title3)
+                                        .padding(10)
+                                        .foregroundColor(.black)
+                                        .background(
+                                            RoundedRectangle(cornerRadius: 10)
+                                                .stroke(Color("stroke"), lineWidth: Constants.strokeWidth)
+                                                .background(Color.white)
+                                        )
+                                        .padding(.horizontal, 4)
+                                        .padding(.bottom)
+                                }
+                                .tint(.black)
+                            }
+                        }
+                    }
+                    .padding(.horizontal)
+                    .padding(.bottom, 13)
                 }
-            }
-            .padding()
-            .font(.title2)
-            
-            // MARK: - Main
-            Group {
-                Text("Habit name")
+                Text("How many days per week should you comlete that habit?")
+                    .bold()
+                    .font(.title2)
+                    .padding(.horizontal, 13)
+                HStack {
+                    ForEach(1...7, id: \.self) { number in
+                        
+                        Button {
+                            colorState[selectedButtonNumber].toggle()
+                            colorState[number-1].toggle()
+                            selectedButtonNumber = number - 1
+                        } label: {
+                            daysPerWeekButton(colorState: colorState[number-1], number: number)
+                        }
+                        
+                    }
+                }
+                .padding(10)
+                
+                Text("You can change your goal at any time.")
+                    .padding(.horizontal, 13)
+                    .padding(.bottom)
+                    .font(.callout)
+                // MARK: - Color Picker
+                Text("Habit color")
                     .bold()
                     .font(.title)
                     .padding(.horizontal, 12)
                 
-                TextFieldView(habitName: $habitName)
+                ColorSelectionView()
                 
-                Text("Templates:")
-                    .font(.title3)
-                    .padding(13)
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack {
-                        ForEach(model.templates) { habit in
-                            Button {
-                                habitName = habit.name
-                            } label: {
-                                Text(habit.name)
-                                    .bold()
-                                    .font(.title3)
-                                    .padding(10)
-                                    .foregroundColor(.black)
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 10)
-                                            .stroke(Color("stroke"), lineWidth: Constants.strokeWidth)
-                                            .background(Color.white)
-                                    )
-                                    .padding(.horizontal, 4)
-                            }
-                            .tint(.black)
-                        }
-                    }
-                }
-                .padding(.horizontal)
-                .padding(.bottom, 13)
+                Spacer()
             }
-            Text("How many days per week should you comlete that habit?")
-                .bold()
-                .font(.title)
-                .padding(.horizontal, 13)
-            HStack {
-                ForEach(1...7, id: \.self) { number in
-                    
-                    Button {
-                        colorState[selectedButtonNumber].toggle()
-                        colorState[number-1].toggle()
-                        selectedButtonNumber = number - 1
-                    } label: {
-                        daysPerWeekButton(colorState: colorState[number-1], number: number)
-                    }
-                    
-                }
-            }
-            .padding()
-            
-            Text("You can change your goal at any time.")
-                .padding(.horizontal, 13)
-                .padding(.bottom)
-                .font(.callout)
-            // MARK: - Color Picker
-            Text("Habit color")
-                .bold()
-                .font(.title)
-                .padding(.horizontal, 12)
-            
-            ColorSelectionView()
-            
-            Spacer()
         }
     }
 }

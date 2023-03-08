@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct Constants {
     
@@ -19,5 +20,10 @@ struct Constants {
         static let canUserPress = "canUserPress"
         static let lastUserDate = "lastUserDate"
         
+    }
+    struct ColorPalattes {
+        static let standart = [Color("blue"), Color("green"), Color("lightBlue"), Color("orange"), Color("purple"), Color("red"), Color("turquoise"), Color("yellow")]
+        static let soft = [Color("brownS"), Color("darkGreenS"), Color("greenS"), Color("pinkS"), Color("purpleS"), Color("turquoiseS"), Color("woodS"), Color("yellowS")]
+        static let bright = [Color("darkBlueB"), Color("greenB"), Color("lightBlueB"), Color("orangeB"), Color("purpleB"), Color("redB"), Color("toxicB"), Color("yellowB")]
     }
 }

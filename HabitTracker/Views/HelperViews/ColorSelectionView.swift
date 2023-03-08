@@ -15,7 +15,7 @@ struct ColorSelectionView: View {
     @EnvironmentObject var model: ViewModel
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             Button {
                 UIColorWellHelper.helper.execute?()
             } label: {
@@ -38,9 +38,11 @@ struct ColorSelectionView: View {
                 .padding(.horizontal, 13)
                 .padding(.bottom)
                 .font(.callout)
-            Text("Standart")
-                .font(.headline)
-                .padding(.trailing, 230)
+        
+            ColorPalettes(name: "Standart", palettes: Constants.ColorPalattes.standart)
+            ColorPalettes(name: "Bright", palettes: Constants.ColorPalattes.bright)
+            ColorPalettes(name: "Soft", palettes: Constants.ColorPalattes.soft)
+            
             Spacer()
         }
     }

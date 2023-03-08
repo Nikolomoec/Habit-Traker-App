@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SwiftUI
 
 class HabitModel: Identifiable {
     
@@ -30,10 +29,4 @@ class HabitTemplates: Identifiable, Decodable {
     var id: Int
     var name: String
     
-}
-
-struct ColorPalattes {
-    static let standart = [Color(""), Color(""), Color(""), Color(""), Color(""), Color(""), Color(""), Color("")]
-    static let bright = [Color(""), Color(""), Color(""), Color(""), Color(""), Color(""), Color(""), Color("")]
-    static let soft = [Color(""), Color(""), Color(""), Color(""), Color(""), Color(""), Color(""), Color("")]
 }
