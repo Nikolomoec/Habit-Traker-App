@@ -70,10 +70,12 @@ struct AddHabit: View {
                 .padding(.horizontal, 16)
                 .background (
                     RoundedRectangle(cornerRadius: 8, style: .continuous)
-                        .stroke(.gray)
+                        .stroke(Color("stroke"), lineWidth: Constants.strokeWidth)
+                        .background(Color.white)
                         .frame(height:70)
                 )
                 .padding()
+                .tint(.black)
 
             Text("Templates:")
                 .font(.title3)
@@ -88,10 +90,11 @@ struct AddHabit: View {
                                 .bold()
                                 .font(.title3)
                                 .padding(10)
-                                .foregroundColor(.white)
+                                .foregroundColor(.black)
                                 .background(
-                                    RoundedRectangle(cornerRadius: 4)
-                                        .foregroundColor(.black)
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(Color("stroke"), lineWidth: Constants.strokeWidth)
+                                        .background(Color.white)
                                     )
                             .padding(.horizontal, 4)
                         }

@@ -9,6 +9,8 @@ import Foundation
 
 struct Constants {
     
+    static let strokeWidth = 1.4
+    
     struct Config {
         
         // UserDefaults Keys

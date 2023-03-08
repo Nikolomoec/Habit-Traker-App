@@ -13,23 +13,17 @@ struct daysPerWeekButton: View {
     var number: Int
     
     var body: some View {
-        ZStack {
-            Rectangle()
-                .stroke(Color.gray, lineWidth: 3)
-                .background(
-                    Rectangle()
-                        .foregroundColor(
-                            colorState ? .blue : .black
-                        )
-                )
-                .frame(width: 50, height: 50)
-                .cornerRadius(10)
-            
-            Text(String(number))
-                .foregroundColor(.white)
-                .bold()
-                .font(.largeTitle)
-        }
+        Text(String(number))
+            .foregroundColor(colorState ? .white : .black)
+            .bold()
+            .font(.largeTitle)
+            .frame(width: 50, height: 50)
+            .background(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color("stroke"), lineWidth: colorState ? 0 : Constants.strokeWidth)
+            )
+            .background(colorState ? .blue : .white)
+            .cornerRadius(10)
     }
 }
 
