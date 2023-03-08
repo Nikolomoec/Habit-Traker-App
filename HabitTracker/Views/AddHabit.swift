@@ -63,20 +63,8 @@ struct AddHabit: View {
                 .font(.title)
                 .padding(.horizontal, 12)
             
-                TextField("", text: $habitName)
-                .foregroundColor(.black)
-                .bold()
-                .font(.title2)
-                .padding(.horizontal, 16)
-                .background (
-                    RoundedRectangle(cornerRadius: 8, style: .continuous)
-                        .stroke(Color("stroke"), lineWidth: Constants.strokeWidth)
-                        .background(Color.white)
-                        .frame(height:70)
-                )
-                .padding()
-                .tint(.black)
-
+            TextFieldView(habitName: $habitName)
+            
             Text("Templates:")
                 .font(.title3)
                 .padding(13)
