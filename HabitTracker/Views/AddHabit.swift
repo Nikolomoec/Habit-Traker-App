@@ -122,7 +122,7 @@ struct AddHabit: View {
                 .font(.title)
                 .padding(.horizontal, 12)
             
-            ColorPickerView()
+            ColorSelectionView()
             
             Spacer()
         }
