@@ -57,41 +57,42 @@ struct AddHabit: View {
             .font(.title2)
             
             // MARK: - Main
-            
-            Text("Habit name")
-                .bold()
-                .font(.title)
-                .padding(.horizontal, 12)
-            
-            TextFieldView(habitName: $habitName)
-            
-            Text("Templates:")
-                .font(.title3)
-                .padding(13)
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
-                    ForEach(model.templates) { habit in
-                        Button {
-                            habitName = habit.name
-                        } label: {
-                            Text(habit.name)
-                                .bold()
-                                .font(.title3)
-                                .padding(10)
-                                .foregroundColor(.black)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .stroke(Color("stroke"), lineWidth: Constants.strokeWidth)
-                                        .background(Color.white)
+            Group {
+                Text("Habit name")
+                    .bold()
+                    .font(.title)
+                    .padding(.horizontal, 12)
+                
+                TextFieldView(habitName: $habitName)
+                
+                Text("Templates:")
+                    .font(.title3)
+                    .padding(13)
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack {
+                        ForEach(model.templates) { habit in
+                            Button {
+                                habitName = habit.name
+                            } label: {
+                                Text(habit.name)
+                                    .bold()
+                                    .font(.title3)
+                                    .padding(10)
+                                    .foregroundColor(.black)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .stroke(Color("stroke"), lineWidth: Constants.strokeWidth)
+                                            .background(Color.white)
                                     )
-                            .padding(.horizontal, 4)
+                                    .padding(.horizontal, 4)
+                            }
+                            .tint(.black)
                         }
-                        .tint(.black)
                     }
                 }
+                .padding(.horizontal)
+                .padding(.bottom, 13)
             }
-            .padding(.horizontal)
-            .padding(.bottom, 13)
             Text("How many days per week should you comlete that habit?")
                 .bold()
                 .font(.title)
@@ -111,8 +112,17 @@ struct AddHabit: View {
             }
             .padding()
             
+            Text("You can change your goal at any time.")
+                .padding(.horizontal, 13)
+                .padding(.bottom)
+                .font(.callout)
             // MARK: - Color Picker
-            Text("")
+            Text("Habit color")
+                .bold()
+                .font(.title)
+                .padding(.horizontal, 12)
+            
+            ColorPickerView()
             
             Spacer()
         }
