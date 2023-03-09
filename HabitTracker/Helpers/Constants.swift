@@ -19,6 +19,7 @@ struct Constants {
         static let streakHeight = "streakHeight"
         static let canUserPress = "canUserPress"
         static let lastUserDate = "lastUserDate"
+        static let controlScore = "controlScore"
         
     }
     struct ColorPalattes {

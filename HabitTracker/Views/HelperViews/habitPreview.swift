@@ -10,7 +10,10 @@ import SwiftUI
 struct habitPreview: View {
     
     @AppStorage(Constants.Config.streak) var streak = 0
-    @State private var ifTapped = false
+    @AppStorage(Constants.Config.canUserPress) var canUserPress = true
+    @AppStorage(Constants.Config.lastUserDate) var lastUserDate = Date()
+    @AppStorage(Constants.Config.controlScore) var controlScore = true
+    @EnvironmentObject var model: ViewModel
     
     private let dayLetters = ["M", "T", "W", "T", "F", "S","S"]
     
@@ -25,10 +28,11 @@ struct habitPreview: View {
                 RoundedRectangle(cornerRadius: 7)
                     .stroke(Color("stroke"), lineWidth: Constants.strokeWidth)
                     .background(
-                        ifTapped ? accentColor.opacity(0.1) : .white
+                        !canUserPress ? accentColor.opacity(0.1) : .white
                             .opacity(0.2)
                     )
                     .cornerRadius(7)
+                
                 VStack (alignment: .leading) {
                     HStack {
                         Text(String(streak))
@@ -44,11 +48,21 @@ struct habitPreview: View {
                         Spacer()
                         
                         Button {
-                            ifTapped.toggle()
+                            canUserPress.toggle()
+                            if canUserPress {
+                                DispatchQueue.main.async {
+                                    lastUserDate = Date()
+                                }
+                                if controlScore {
+                                    streak += 1
+                                    model.streakHeightCalc()
+                                    controlScore.toggle()
+                                }
+                            }
                         } label: {
                             ZStack {
                                 Image(systemName: "checkmark.circle.fill")
-                                    .foregroundColor(ifTapped ? accentColor : .gray)
+                                    .foregroundColor(!canUserPress ? accentColor : .gray)
                                     .bold()
                                     .font(.largeTitle)
                             }
@@ -66,7 +80,7 @@ struct habitPreview: View {
                         .bold()
                         .font(.title)
                         .foregroundColor(.black)
-                        .padding(.leading)
+                        .padding(.leading, 10)
                         .padding(.top, 7)
                         .padding(.bottom, 2)
                     
@@ -77,7 +91,7 @@ struct habitPreview: View {
                                     .stroke(Color("stroke"), lineWidth: Constants.strokeWidth)
                                     .frame(width: 20, height: 20)
                                     .background(
-                                        ifTapped ? accentColor.opacity(0.15) : .white
+                                        !canUserPress ? accentColor.opacity(0.15) : .white
                                     )
                                 Text(day)
                                     .font(.caption2)
@@ -103,6 +117,7 @@ struct habitPreview: View {
 
 struct habitPreview_Previews: PreviewProvider {
     static var previews: some View {
-        habitPreview(accentColor: .red, name: "Workout")
+        habitPreview(accentColor: .red, name: "Walk a Dog")
+            .environmentObject(ViewModel())
     }
 }

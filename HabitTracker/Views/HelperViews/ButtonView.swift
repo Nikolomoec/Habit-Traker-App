@@ -11,6 +11,7 @@ struct ButtonView: View {
     
     @Binding var streak: Int
     
+    @AppStorage(Constants.Config.controlScore) private var controlScore = true
     @AppStorage(Constants.Config.canUserPress) private var canUserPress = true
     @AppStorage(Constants.Config.lastUserDate) private var lastUserDate = Date() {
         didSet {
@@ -52,6 +53,7 @@ struct ButtonView: View {
             .onReceive(NotificationCenter.default.publisher(for: Notification.Name.NSCalendarDayChanged)) { _ in
                 DispatchQueue.main.async {
                     canUserPress = true
+                    controlScore = true
                     if lastUserDate.addingTimeInterval(86400*2) < Date() {
                         UserDefaults.standard.set(0, forKey: Constants.Config.streak)
                     }
