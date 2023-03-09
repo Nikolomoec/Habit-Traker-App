@@ -24,9 +24,11 @@ struct habitPreview: View {
             ZStack {
                 RoundedRectangle(cornerRadius: 7)
                     .stroke(Color("stroke"), lineWidth: Constants.strokeWidth)
-//                    .background(
-//                        ifTapped ? accentColor : .white
-//                    )
+                    .background(
+                        ifTapped ? accentColor.opacity(0.1) : .white
+                            .opacity(0.2)
+                    )
+                    .cornerRadius(7)
                 VStack (alignment: .leading) {
                     HStack {
                         Text(String(streak))
@@ -66,20 +68,26 @@ struct habitPreview: View {
                         .foregroundColor(.black)
                         .padding(.leading)
                         .padding(.top, 7)
+                        .padding(.bottom, 2)
                     
                     HStack {
                         ForEach(dayLetters, id: \.self) { day in
                             ZStack {
                                 RoundedRectangle(cornerRadius: 7)
                                     .stroke(Color("stroke"), lineWidth: Constants.strokeWidth)
+                                    .frame(width: 20, height: 20)
                                     .background(
-                                        ifTapped ? accentColor : .white
+                                        ifTapped ? accentColor.opacity(0.15) : .white
                                     )
                                 Text(day)
+                                    .font(.caption2)
                                     .bold()
                                     .foregroundColor(accentColor)
+                                    .padding(3)
+                                
                             }
                         }
+                        
                     }
                     .padding(.horizontal, 10)
                     
@@ -87,7 +95,7 @@ struct habitPreview: View {
                 }
                 
             }
-            .frame(width: 200, height: 170)
+            .frame(width: 230, height: 150)
             .padding()
         }
     }
