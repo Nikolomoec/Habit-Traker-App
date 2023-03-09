@@ -9,7 +9,9 @@ import SwiftUI
 
 struct HabitListView: View {
     var body: some View {
-        BackgroundGrad()
+        ZStack {
+            BackgroundGrad()
+        }
     }
 }
 
