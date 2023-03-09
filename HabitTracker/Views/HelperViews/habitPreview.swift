@@ -22,6 +22,11 @@ struct habitPreview: View {
             
         } label: {
             ZStack {
+                RoundedRectangle(cornerRadius: 7)
+                    .stroke(Color("stroke"), lineWidth: Constants.strokeWidth)
+//                    .background(
+//                        ifTapped ? accentColor : .white
+//                    )
                 VStack (alignment: .leading) {
                     HStack {
                         Text(String(streak))
@@ -76,15 +81,11 @@ struct habitPreview: View {
                             }
                         }
                     }
+                    .padding(.horizontal, 10)
                     
                     Spacer()
                 }
                 
-                RoundedRectangle(cornerRadius: 7)
-                    .stroke(Color("stroke"), lineWidth: Constants.strokeWidth)
-//                    .background(
-//                        ifTapped ? accentColor : .white
-//                    )
             }
             .frame(width: 200, height: 170)
             .padding()
