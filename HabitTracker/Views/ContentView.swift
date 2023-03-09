@@ -31,7 +31,7 @@ struct ContentView: View {
                 HStack {
                     Text(currentDate.formattedMonth)
                         .padding(.horizontal, 10)
-                        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.NSCalendarDayChanged)) { _ in
+                        .onReceive(model.dayChangeNotiflication) { _ in
                             currentDate = Date()
                         }
                     Text(currentTime.formattedTime)

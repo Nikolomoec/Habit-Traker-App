@@ -14,7 +14,7 @@ class ViewModel: ObservableObject {
     @Published var templates = [HabitTemplates]()
     @Published var addHabitSheet = false
     @Published var habitColor = Color.blue
-    
+    @Published var dayChangeNotiflication = NotificationCenter.default.publisher(for: Notification.Name.NSCalendarDayChanged)
     init() {
         getRemoteData()
     }

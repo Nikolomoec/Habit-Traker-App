@@ -13,6 +13,7 @@ struct habitPreview: View {
     @AppStorage(Constants.Config.canUserPress) var canUserPress = true
     @AppStorage(Constants.Config.lastUserDate) var lastUserDate = Date()
     @AppStorage(Constants.Config.controlScore) var controlScore = true
+    
     @EnvironmentObject var model: ViewModel
     
     private let dayLetters = ["M", "T", "W", "T", "F", "S","S"]
@@ -48,16 +49,17 @@ struct habitPreview: View {
                         Spacer()
                         
                         Button {
-                            canUserPress.toggle()
                             if canUserPress {
                                 DispatchQueue.main.async {
                                     lastUserDate = Date()
                                 }
-                                if controlScore {
-                                    streak += 1
-                                    model.streakHeightCalc()
-                                    controlScore.toggle()
-                                }
+                                streak += 1
+                                model.streakHeightCalc()
+                                canUserPress.toggle()
+                                
+                            } else {
+                                streak -= 1
+                                canUserPress.toggle()
                             }
                         } label: {
                             ZStack {

@@ -50,7 +50,7 @@ struct ButtonView: View {
                 }
                 
             }
-            .onReceive(NotificationCenter.default.publisher(for: Notification.Name.NSCalendarDayChanged)) { _ in
+            .onReceive(model.dayChangeNotiflication) { _ in
                 DispatchQueue.main.async {
                     canUserPress = true
                     controlScore = true
