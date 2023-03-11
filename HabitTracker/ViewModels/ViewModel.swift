@@ -46,14 +46,19 @@ class ViewModel: ObservableObject {
         habits.append(HabitModel(name: name, daysPerWeek: daysPerWeek + 1, habitColor: habitColor))
     }
     
-    func isTodaysDateChecked(day: String) {
+    func isTodaysDateChecked() {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEE"
         
         let currentDay = dateFormatter.string(from: Date())
         
-        if day == currentDay && !canUserPress {
-            
+        for day in days {
+            if day == currentDay && !canUserPress {
+                UserDefaults.standard.set(true, forKey: "\(day)")
+            }
+            if else day != currentDay && {
+                
+            }
         }
     }
     

@@ -31,3 +31,15 @@ class HabitTemplates: Identifiable, Decodable {
     var name: String
     
 }
+
+class daysOfTheWeek {
+    var opacity: Int
+    var backColor: Color
+    var lettersColor: Color
+    
+    init(opacity: Int, backColor: Color, letterColor: Color) {
+        self.opacity = opacity
+        self.backColor = backColor
+        self.lettersColor = letterColor
+    }
+}

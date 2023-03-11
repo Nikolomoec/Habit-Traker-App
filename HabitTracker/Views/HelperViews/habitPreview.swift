@@ -51,6 +51,7 @@ struct habitPreview: View {
                         Spacer()
                         
                         Button {
+                            model.isTodaysDateChecked()
                             if canUserPress {
                                 DispatchQueue.main.async {
                                     lastUserDate = Date()
