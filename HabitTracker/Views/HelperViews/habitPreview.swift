@@ -9,17 +9,18 @@ import SwiftUI
 
 struct habitPreview: View {
     
-    @AppStorage(Constants.Config.streak) var streak = 0
-    @AppStorage(Constants.Config.canUserPress) var canUserPress = true
-    @AppStorage(Constants.Config.lastUserDate) var lastUserDate = Date()
-    @AppStorage(Constants.Config.controlScore) var controlScore = true
+    @AppStorage(Constants.Config.streak) private var streak = 0
+    @AppStorage(Constants.Config.canUserPress) private var canUserPress = true
+    @AppStorage(Constants.Config.lastUserDate) private var lastUserDate = Date()
+    @AppStorage(Constants.Config.controlScore) private var controlScore = true
+    
+    @AppStorage(Constants.Config.daysCompleted) private var daysCompleted = 0
     
     @EnvironmentObject var model: ViewModel
     
-    private let dayLetters = ["M", "T", "W", "T", "F", "S","S"]
-    
     var accentColor: Color
     var name: String
+    var daysPerWeek: Int
     
     var body: some View {
         
@@ -55,11 +56,13 @@ struct habitPreview: View {
                                     lastUserDate = Date()
                                 }
                                 streak += 1
+                                daysCompleted += 1
                                 model.streakHeightCalc()
                                 canUserPress.toggle()
                                 
                             } else {
                                 streak -= 1
+                                daysCompleted -= 1
                                 canUserPress.toggle()
                             }
                         } label: {
@@ -88,7 +91,7 @@ struct habitPreview: View {
                         .padding(.bottom, 2)
                     
                     HStack {
-                        ForEach(dayLetters, id: \.self) { day in
+                        ForEach(model.days, id: \.self) { day in
                             ZStack {
                                 RoundedRectangle(cornerRadius: 7)
                                     .stroke(Color("stroke"), lineWidth: Constants.strokeWidth)
@@ -96,7 +99,7 @@ struct habitPreview: View {
                                     .background(
                                         !canUserPress ? accentColor.opacity(0.15) : .white
                                     )
-                                Text(day)
+                                Text(day.prefix(1))
                                     .font(.caption2)
                                     .bold()
                                     .foregroundColor(accentColor)
@@ -104,7 +107,10 @@ struct habitPreview: View {
                                 
                             }
                         }
-                        
+                        Text("\(daysCompleted)/\(daysPerWeek)")
+                            .font(.callout)
+                            .bold()
+                            .foregroundColor(.gray)
                     }
                     .padding(.horizontal, 10)
                     
@@ -112,7 +118,7 @@ struct habitPreview: View {
                 }
                 
             }
-            .frame(width: 230, height: 150)
+            .frame(width: 245, height: 150)
             .padding()
         }
     }
@@ -120,7 +126,7 @@ struct habitPreview: View {
 
 struct habitPreview_Previews: PreviewProvider {
     static var previews: some View {
-        habitPreview(accentColor: .red, name: "Walk a Dog")
+        habitPreview(accentColor: .red, name: "Walk a Dog", daysPerWeek: 4)
             .environmentObject(ViewModel())
     }
 }

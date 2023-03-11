@@ -10,11 +10,16 @@ import SwiftUI
 
 class ViewModel: ObservableObject {
     
+    @AppStorage(Constants.Config.canUserPress) private var canUserPress = true
+    
     @Published var habits = [HabitModel]()
     @Published var templates = [HabitTemplates]()
     @Published var addHabitSheet = false
     @Published var habitColor = Color.blue
     @Published var dayChangeNotiflication = NotificationCenter.default.publisher(for: Notification.Name.NSCalendarDayChanged)
+    
+    let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    
     init() {
         getRemoteData()
     }
@@ -39,6 +44,17 @@ class ViewModel: ObservableObject {
     
     func addHabbit(name: String, daysPerWeek: Int, habitColor: Color) {
         habits.append(HabitModel(name: name, daysPerWeek: daysPerWeek + 1, habitColor: habitColor))
+    }
+    
+    func isTodaysDateChecked(day: String) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE"
+        
+        let currentDay = dateFormatter.string(from: Date())
+        
+        if day == currentDay && !canUserPress {
+            
+        }
     }
     
     func getRemoteData() {
