@@ -26,6 +26,8 @@ class ViewModel: ObservableObject {
         for day in Array(1...7) {
             UserDefaults.standard.set(false, forKey: "dayWasChecked\(day)")
         }
+        
+        isTodaysDateChecked()
     }
     
     func canUserPressCalc() {
@@ -57,7 +59,11 @@ class ViewModel: ObservableObject {
             let dayState = UserDefaults.standard.value(forKey: "dayWasChecked\(day)")
             
             if todaysDayNumber <= day && !(dayState as! Bool) {
-                
+                UserDefaults.standard.set(DaysOfTheWeek(opacity: 0.15, backColor: habitColor, letterColor: habitColor), forKey: "daySettings\(day)")
+            } else if todaysDayNumber <= day && dayState as! Bool {
+                UserDefaults.standard.set(DaysOfTheWeek(opacity: 1.0, backColor: habitColor, letterColor: Color.white), forKey: "daySettings\(day)")
+            } else {
+                UserDefaults.standard.set(DaysOfTheWeek(opacity: 1.0, backColor: Color.white, letterColor: Color.gray), forKey: "daySettings\(day)")
             }
         }
     }

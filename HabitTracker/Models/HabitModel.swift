@@ -32,12 +32,12 @@ class HabitTemplates: Identifiable, Decodable {
     
 }
 
-class daysOfTheWeek {
-    var opacity: Int
+class DaysOfTheWeek {
+    var opacity: Double
     var backColor: Color
     var lettersColor: Color
     
-    init(opacity: Int, backColor: Color, letterColor: Color) {
+    init(opacity: Double, backColor: Color, letterColor: Color) {
         self.opacity = opacity
         self.backColor = backColor
         self.lettersColor = letterColor
