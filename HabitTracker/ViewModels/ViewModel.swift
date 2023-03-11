@@ -22,6 +22,10 @@ class ViewModel: ObservableObject {
     
     init() {
         getRemoteData()
+        
+        for day in Array(1...7) {
+            UserDefaults.standard.set(false, forKey: "dayWasChecked\(day)")
+        }
     }
     
     func canUserPressCalc() {
@@ -47,16 +51,12 @@ class ViewModel: ObservableObject {
     }
     
     func isTodaysDateChecked() {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEEE"
+        let todaysDayNumber = Calendar.current.component(.weekday, from: Date())
         
-        let currentDay = dateFormatter.string(from: Date())
-        
-        for day in days {
-            if day == currentDay && !canUserPress {
-                UserDefaults.standard.set(true, forKey: "\(day)")
-            }
-            if else day != currentDay && {
+        for day in Array(1...7) {
+            let dayState = UserDefaults.standard.value(forKey: "dayWasChecked\(day)")
+            
+            if todaysDayNumber <= day && !(dayState as! Bool) {
                 
             }
         }
