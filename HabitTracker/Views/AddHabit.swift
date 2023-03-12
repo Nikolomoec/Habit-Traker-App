@@ -14,82 +14,97 @@ struct AddHabit: View {
     @EnvironmentObject var model: ViewModel
     
     var body: some View {
-        ScrollView {
-            VStack (alignment: .leading) {
-                // MARK: - Heading
-                AddHabitHeaderView()
-                
-                // MARK: - Main
-                Group {
-                    Text("Habit name")
+        NavigationStack {
+            ScrollView {
+                VStack (alignment: .leading) {
+                    // MARK: - Main
+                    Group {
+                        Text("Habit name")
+                            .bold()
+                            .font(.title)
+                            .padding(.horizontal, 12)
+                        
+                        TextFieldView(habitName: $model.habitName)
+                        
+                        Text("Templates:")
+                            .font(.title3)
+                            .padding(13)
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack {
+                                ForEach(model.templates) { habit in
+                                    Button {
+                                        model.habitName = habit.name
+                                    } label: {
+                                        Text(habit.name)
+                                            .bold()
+                                            .font(.title3)
+                                            .padding(10)
+                                            .foregroundColor(.black)
+                                            .background(
+                                                RoundedRectangle(cornerRadius: 10)
+                                                    .stroke(Color("stroke"), lineWidth: Constants.strokeWidth)
+                                                    .background(Color.white)
+                                            )
+                                            .padding(.horizontal, 4)
+                                            .padding(.bottom)
+                                    }
+                                    .tint(.black)
+                                }
+                            }
+                        }
+                        .padding(.horizontal)
+                        .padding(.bottom, 13)
+                    }
+                    Text("How many days per week should you comlete that habit?")
+                        .bold()
+                        .font(.title2)
+                        .padding(.horizontal, 13)
+                    HStack {
+                        ForEach(1...7, id: \.self) { number in
+                            
+                            Button {
+                                colorState[model.selectedButtonNum].toggle()
+                                colorState[number-1].toggle()
+                                model.selectedButtonNum = number - 1
+                            } label: {
+                                daysPerWeekButton(colorState: colorState[number-1], number: number)
+                            }
+                            
+                        }
+                    }
+                    .padding(10)
+                    
+                    Text("You can change your goal at any time.")
+                        .padding(.horizontal, 13)
+                        .padding(.bottom)
+                        .font(.callout)
+                    // MARK: - Color Picker
+                    Text("Habit color")
                         .bold()
                         .font(.title)
                         .padding(.horizontal, 12)
                     
-                    TextFieldView(habitName: $model.habitName)
+                    ColorSelectionView()
                     
-                    Text("Templates:")
-                        .font(.title3)
-                        .padding(13)
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack {
-                            ForEach(model.templates) { habit in
-                                Button {
-                                    model.habitName = habit.name
-                                } label: {
-                                    Text(habit.name)
-                                        .bold()
-                                        .font(.title3)
-                                        .padding(10)
-                                        .foregroundColor(.black)
-                                        .background(
-                                            RoundedRectangle(cornerRadius: 10)
-                                                .stroke(Color("stroke"), lineWidth: Constants.strokeWidth)
-                                                .background(Color.white)
-                                        )
-                                        .padding(.horizontal, 4)
-                                        .padding(.bottom)
-                                }
-                                .tint(.black)
-                            }
-                        }
-                    }
-                    .padding(.horizontal)
-                    .padding(.bottom, 13)
+                    Spacer()
                 }
-                Text("How many days per week should you comlete that habit?")
-                    .bold()
-                    .font(.title2)
-                    .padding(.horizontal, 13)
-                HStack {
-                    ForEach(1...7, id: \.self) { number in
-                        
-                        Button {
-                            colorState[model.selectedButtonNum].toggle()
-                            colorState[number-1].toggle()
-                            model.selectedButtonNum = number - 1
-                        } label: {
-                            daysPerWeekButton(colorState: colorState[number-1], number: number)
-                        }
-                        
-                    }
-                }
-                .padding(10)
-                
-                Text("You can change your goal at any time.")
-                    .padding(.horizontal, 13)
-                    .padding(.bottom)
-                    .font(.callout)
-                // MARK: - Color Picker
-                Text("Habit color")
-                    .bold()
-                    .font(.title)
-                    .padding(.horizontal, 12)
-                
-                ColorSelectionView()
-                
-                Spacer()
             }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading){
+                    CancelButton()
+                        .font(.title2)
+                }
+                ToolbarItem(placement: .principal) {
+                    Text("New Habit")
+                        .bold()
+                        .font(.title2)
+                }
+                ToolbarItem(placement: .navigationBarTrailing){
+                    SaveButton()
+                        .font(.title2)
+                }
+            }
+            .toolbarBackground(.white, for: .navigationBar)
         }
     }
 }
