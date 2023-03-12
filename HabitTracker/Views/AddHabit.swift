@@ -88,6 +88,7 @@ struct AddHabit: View {
                     
                     Spacer()
                 }
+                .interactiveDismissDisabled()
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading){
