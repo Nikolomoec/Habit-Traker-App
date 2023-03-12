@@ -81,3 +81,18 @@ extension Date {
         )
     }
 }
+extension UserDefaults {
+    func color(forKey key: String) -> Color? {
+        guard let data = data(forKey: key) else { return nil }
+        return try? NSKeyedUnarchiver.unarchivedObject(ofClass: UIColor.self, from: data).map { Color($0) }
+    }
+    
+    func set(_ color: Color?, forKey key: String) {
+        guard let color = color else {
+            removeObject(forKey: key)
+            return
+        }
+        let data = try? NSKeyedArchiver.archivedData(withRootObject: UIColor(color), requiringSecureCoding: false)
+        set(data, forKey: key)
+    }
+}

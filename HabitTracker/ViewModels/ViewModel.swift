@@ -59,11 +59,17 @@ class ViewModel: ObservableObject {
             let dayState = UserDefaults.standard.value(forKey: "dayWasChecked\(day)")
             
             if todaysDayNumber <= day && !(dayState as! Bool) {
-                UserDefaults.standard.set(DaysOfTheWeek(opacity: 0.15, backColor: habitColor, letterColor: habitColor), forKey: "daySettings\(day)")
+                UserDefaults.standard.set(0.15, forKey: "opacityFor\(day)")
+                UserDefaults.standard.set(habitColor, forKey: "backFor\(day)")
+                UserDefaults.standard.set(habitColor, forKey: "letterFor\(day)")
             } else if todaysDayNumber <= day && dayState as! Bool {
-                UserDefaults.standard.set(DaysOfTheWeek(opacity: 1.0, backColor: habitColor, letterColor: Color.white), forKey: "daySettings\(day)")
+                UserDefaults.standard.set(1, forKey: "opacityFor\(day)")
+                UserDefaults.standard.set(habitColor, forKey: "backFor\(day)")
+                UserDefaults.standard.set(Color.white, forKey: "letterFor\(day)")
             } else {
-                UserDefaults.standard.set(DaysOfTheWeek(opacity: 1.0, backColor: Color.white, letterColor: Color.gray), forKey: "daySettings\(day)")
+                UserDefaults.standard.set(1, forKey: "opacityFor\(day)")
+                UserDefaults.standard.set(Color.white, forKey: "backFor\(day)")
+                UserDefaults.standard.set(Color.gray, forKey: "letterFor\(day)")
             }
         }
     }
