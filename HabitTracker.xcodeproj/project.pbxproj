@@ -17,6 +17,7 @@
 		5A0B65B129B6682000416B5C /* daysPerWeekButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0B65B029B6682000416B5C /* daysPerWeekButton.swift */; };
 		5A14B42E29B9180700661BF0 /* ColorPalettes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A14B42D29B9180700661BF0 /* ColorPalettes.swift */; };
 		5A14B43029BA111300661BF0 /* habitPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A14B42F29BA111200661BF0 /* habitPreview.swift */; };
+		5A14B43229BDD60900661BF0 /* AddHabitHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A14B43129BDD60900661BF0 /* AddHabitHeaderView.swift */; };
 		5A6C4F5D29B3B48F003C9318 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6C4F5C29B3B48F003C9318 /* ViewModel.swift */; };
 		5ABB8C3B29B8B395007BEB77 /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABB8C3A29B8B395007BEB77 /* TextFieldView.swift */; };
 		5ABB8C4629B908C5007BEB77 /* ColorSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABB8C4529B908C5007BEB77 /* ColorSelectionView.swift */; };
@@ -38,6 +39,7 @@
 		5A0B65B029B6682000416B5C /* daysPerWeekButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = daysPerWeekButton.swift; sourceTree = "<group>"; };
 		5A14B42D29B9180700661BF0 /* ColorPalettes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalettes.swift; sourceTree = "<group>"; };
 		5A14B42F29BA111200661BF0 /* habitPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = habitPreview.swift; sourceTree = "<group>"; };
+		5A14B43129BDD60900661BF0 /* AddHabitHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabitHeaderView.swift; sourceTree = "<group>"; };
 		5A6C4F5C29B3B48F003C9318 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		5ABB8C3A29B8B395007BEB77 /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
 		5ABB8C4529B908C5007BEB77 /* ColorSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectionView.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				5ABB8C4529B908C5007BEB77 /* ColorSelectionView.swift */,
 				5A14B42D29B9180700661BF0 /* ColorPalettes.swift */,
 				5A14B42F29BA111200661BF0 /* habitPreview.swift */,
+				5A14B43129BDD60900661BF0 /* AddHabitHeaderView.swift */,
 			);
 			path = HelperViews;
 			sourceTree = "<group>";
@@ -234,6 +237,7 @@
 				5A0B65A529B65AE300416B5C /* HabitListView.swift in Sources */,
 				5A6C4F5D29B3B48F003C9318 /* ViewModel.swift in Sources */,
 				5A0B65B129B6682000416B5C /* daysPerWeekButton.swift in Sources */,
+				5A14B43229BDD60900661BF0 /* AddHabitHeaderView.swift in Sources */,
 				5AD82B2229AD3866007317B6 /* ButtonView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

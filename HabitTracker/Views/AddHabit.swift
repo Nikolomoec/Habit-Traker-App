@@ -10,10 +10,6 @@ import SwiftUI
 struct AddHabit: View {
     
     @State private var colorState = [false,false,false,true,false,false,false]
-    @State private var selectedButtonNumber = 3
-    @State private var showCancelAlert = false
-    @State private var showSaveAlert = false
-    @State private var habitName = ""
     
     @EnvironmentObject var model: ViewModel
     
@@ -21,41 +17,7 @@ struct AddHabit: View {
         ScrollView {
             VStack (alignment: .leading) {
                 // MARK: - Heading
-                HStack {
-                    
-                    Button("Cancel") {
-                        showCancelAlert.toggle()
-                    }
-                    .alert(isPresented: $showCancelAlert) {
-                        Alert(title: Text("Warning"),
-                              message: Text("If you made changes, they will be discarded"),
-                              primaryButton: .destructive(Text("Discard changes"), action: {
-                            model.newHabitSheet = false
-                        }),
-                              secondaryButton: .cancel())
-                    }
-                    
-                    Spacer()
-                    
-                    Text("New Habit")
-                        .bold()
-                    
-                    Spacer()
-                    
-                    Button("Save") {
-                        if habitName == "" {
-                            showSaveAlert.toggle()
-                        } else {
-                            model.addHabbit(name: habitName, daysPerWeek: selectedButtonNumber, habitColor: model.habitColor)
-                            model.newHabitSheet = false
-                        }
-                    }
-                    .alert(isPresented: $showSaveAlert) {
-                        Alert(title: Text("Your habit needs a name"), dismissButton: .cancel(Text("OK")))
-                    }
-                }
-                .padding()
-                .font(.title2)
+                AddHabitHeaderView()
                 
                 // MARK: - Main
                 Group {
@@ -64,7 +26,7 @@ struct AddHabit: View {
                         .font(.title)
                         .padding(.horizontal, 12)
                     
-                    TextFieldView(habitName: $habitName)
+                    TextFieldView(habitName: $model.habitName)
                     
                     Text("Templates:")
                         .font(.title3)
@@ -73,7 +35,7 @@ struct AddHabit: View {
                         HStack {
                             ForEach(model.templates) { habit in
                                 Button {
-                                    habitName = habit.name
+                                    model.habitName = habit.name
                                 } label: {
                                     Text(habit.name)
                                         .bold()
@@ -103,9 +65,9 @@ struct AddHabit: View {
                     ForEach(1...7, id: \.self) { number in
                         
                         Button {
-                            colorState[selectedButtonNumber].toggle()
+                            colorState[model.selectedButtonNum].toggle()
                             colorState[number-1].toggle()
-                            selectedButtonNumber = number - 1
+                            model.selectedButtonNum = number - 1
                         } label: {
                             daysPerWeekButton(colorState: colorState[number-1], number: number)
                         }
