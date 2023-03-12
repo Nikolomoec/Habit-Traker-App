@@ -30,7 +30,7 @@ struct AddHabit: View {
                         Alert(title: Text("Warning"),
                               message: Text("If you made changes, they will be discarded"),
                               primaryButton: .destructive(Text("Discard changes"), action: {
-                            model.addHabitSheet = false
+                            model.newHabitSheet = false
                         }),
                               secondaryButton: .cancel())
                     }
@@ -47,7 +47,7 @@ struct AddHabit: View {
                             showSaveAlert.toggle()
                         } else {
                             model.addHabbit(name: habitName, daysPerWeek: selectedButtonNumber, habitColor: model.habitColor)
-                            model.addHabitSheet = false
+                            model.newHabitSheet = false
                         }
                     }
                     .alert(isPresented: $showSaveAlert) {

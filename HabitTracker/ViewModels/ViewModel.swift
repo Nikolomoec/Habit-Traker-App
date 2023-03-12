@@ -14,8 +14,8 @@ class ViewModel: ObservableObject {
     
     @Published var habits = [HabitModel]()
     @Published var templates = [HabitTemplates]()
-    @Published var addHabitSheet = false
     @Published var habitColor = Color.blue
+    @Published var newHabitSheet = false
     @Published var dayChangeNotiflication = NotificationCenter.default.publisher(for: Notification.Name.NSCalendarDayChanged)
     
     let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
