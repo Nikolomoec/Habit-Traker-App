@@ -14,7 +14,7 @@ struct habitPreview: View {
     @AppStorage(Constants.Config.lastUserDate) private var lastUserDate = Date()
     @AppStorage(Constants.Config.controlScore) private var controlScore = true
     
-    @AppStorage(Constants.Config.daysCompleted) private var daysCompleted = 0
+    @AppStorage(Constants.Config.daysComp) private var daysCompleted = 0
     
     @EnvironmentObject var model: ViewModel
     
@@ -92,20 +92,22 @@ struct habitPreview: View {
                         .padding(.bottom, 2)
                     
                     HStack {
-                        ForEach(model.days, id: \.self) { day in
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 7)
-                                    .stroke(Color("stroke"), lineWidth: Constants.strokeWidth)
-                                    .frame(width: 20, height: 20)
-                                    .background(
-                                        !canUserPress ? accentColor.opacity(0.15) : .white
-                                    )
-                                Text(day.prefix(1))
-                                    .font(.caption2)
-                                    .bold()
-                                    .foregroundColor(accentColor)
-                                    .padding(3)
-                                
+                        HStack(spacing: 4) {
+                            ForEach(model.days, id: \.self) { day in
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 5)
+                                        .stroke(Color("stroke"), lineWidth: Constants.strokeWidth)
+                                        .frame(width: 16, height: 16)
+                                        .background(
+                                            !canUserPress ? accentColor.opacity(0.15) : .white
+                                        )
+                                    Text(day.prefix(1))
+                                        .font(.caption2)
+                                        .bold()
+                                        .foregroundColor(accentColor)
+                                        .padding(3)
+                                    
+                                }
                             }
                         }
                         Text("\(daysCompleted)/\(daysPerWeek)")
@@ -119,8 +121,8 @@ struct habitPreview: View {
                 }
                 
             }
-            .frame(width: 245, height: 150)
-            .padding()
+            .frame(width: 190, height: 150)
+            .padding(5)
         }
     }
 }

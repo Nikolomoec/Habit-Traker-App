@@ -11,37 +11,45 @@ struct HabitListView: View {
     
     @State private var showAlert = false
     
+    private var columns = [
+        GridItem(.fixed(205)),
+        GridItem(.fixed(205))
+        ]
+    
     @EnvironmentObject var model: ViewModel
     
     var body: some View {
-        
-        ZStack {
-            NavigationStack {
-                
-                ScrollView {
-                    
+        NavigationStack {
+            
+            ScrollView {
+                LazyVGrid(columns: columns, alignment: .center, spacing: 20) {
+                    ForEach(model.habits) { habit in
+                        habitPreview(accentColor: habit.habitColor, name: habit.name, daysPerWeek: habit.daysPerWeek)
+                    }
                 }
-                .navigationTitle("Today")
-                .toolbar {
-                    Button {
-                        if model.habits.count > 5 {
-                            showAlert = true
-                        } else {
-                            model.newHabitSheet = true
-                        }
-                    } label: {
-                        Image(systemName: "plus")
-                            .bold()
+                .padding(.top, 20)
+            }
+            .navigationTitle("Today")
+            .toolbar {
+                Button {
+                    if model.habits.count > 5 {
+                        showAlert = true
+                    } else {
+                        model.newHabitSheet = true
+                    }
+                } label: {
+                    Image(systemName: "plus")
+                        .bold()
                         .foregroundColor(.blue)
-                    }
-                    .sheet(isPresented: $model.newHabitSheet) {
-                        AddHabit()
-                    }
+                }
+                .sheet(isPresented: $model.newHabitSheet) {
+                    AddHabit()
                 }
             }
         }
     }
 }
+
 
 
 struct HabitListView_Previews: PreviewProvider {

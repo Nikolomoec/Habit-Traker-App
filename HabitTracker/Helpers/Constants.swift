@@ -20,7 +20,7 @@ struct Constants {
         static let canUserPress = "canUserPress"
         static let lastUserDate = "lastUserDate"
         static let controlScore = "controlScore"
-        static let daysCompleted = "daysCompleted"
+        static let daysComp = "daysComp"
         
     }
     struct ColorPalattes {
